@@ -1,5 +1,7 @@
 package com.mahmud.InventorySystem.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +30,14 @@ public class GreetingController {
     public String whoami() {
         String name = greeting()+" Welcome to Inventory System";
         return name;
+    }
+    @PreAuthorize("hasRole('seller')")
+    @GetMapping("/seller")
+    public String seller() {
+        return "Hi Seller, How are you doing today?";
+    }
+    @GetMapping("/user")
+    public String user() {
+        return "Hi User, How are you doing today?";
     }
 }
